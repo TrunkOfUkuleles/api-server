@@ -1,0 +1,25 @@
+{
+  "name": "api-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrunkOfUkuleles/api-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TrunkOfUkuleles/api-server/issues"
+  },
+  "homepage": "https://github.com/TrunkOfUkuleles/api-server#readme",
+  "dependencies": {
+    "@code-fellows/supergoose": "^1.0.11",
+    "jest": "^26.6.3",
+    "mongoose": "^5.12.5"
+  }
+}
