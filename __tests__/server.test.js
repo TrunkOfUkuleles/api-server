@@ -7,6 +7,8 @@ const mockRequest = supertest(server);
 
 describe('WEB SERVER:', () => {
 
+ 
+
   it('should respond with a 404 on not found', async () => {
     return mockRequest.get('/no-thing').then(data => {
       expect(data.status).toBe(404);
@@ -14,7 +16,7 @@ describe('WEB SERVER:', () => {
   });
 
   it('should respond with a 500 on an error', () => {
-    return mockRequest.put('/books/').then(data => {
+    return mockRequest.put('/books/draw').then(data => {
         expect(data.status).toBe(500);
 });
   });
@@ -57,7 +59,26 @@ describe('WEB SERVER:', () => {
     await mockRequest.delete(`/books/${who}`).then(data=>{
       expect(data.status).toEqual(202);
   });
+});
 
+  it('it should have a second route', async()=>{
+    const newOb = await mockRequest.post('/snacks').send({item: "snacker", brand: "delMan", type: "CANDY"})
+    const who = newOb.body._id
+ 
 
+    let db = await mockRequest.get('/snacks')
+    expect(db.status).toBe(200);
+
+    let getter = await mockRequest.get(`/snacks/${who}`)
+    expect(getter.body._id).toEqual(who)
+
+    const updated = await mockRequest.put(`/snacks/${who}`).send({item: "updateMan", brand: "whoCan", type: "CANDY"})
+    expect(updated.status).toBe(202);
+    expect(updated.body._id).toEqual(who);
+    expect(updated.body.item).toEqual("updateMan")
+
+   await mockRequest.delete(`/snacks/${who}`).then(data=>{
+      expect(data.status).toEqual(202);
+    })
 })
 })

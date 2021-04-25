@@ -29,7 +29,6 @@ async function getSnacks(req, res) {
   
   async function createSnacks(req, res) {
     let content = req.body;
-    console.log("CREATING: ", content)
     let testCreation = await store.create(content);
     res.status(201).json(testCreation);
   }
@@ -43,10 +42,9 @@ async function getSnacks(req, res) {
   }
   
   async function deleteSnack(req, res) {
-    // placeholder for now
     let id = req.params.id;
     await store.delete(id);
-    res.status(202).json("DELETED")
+    res.status(202).send({msg: 'food item deleted'});
   }
   
   module.exports = foodRouter;
