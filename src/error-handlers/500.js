@@ -1,7 +1,7 @@
 'use strict';
 
 
-module.exports = (err, req, res, next) =>{
-    res.status(500).send("Something Big/Small Happened")
-    next()
+module.exports = (err, req, res) =>{
+    res.status(500).send({"Something Big or Small Happened": err.message})
+
 }

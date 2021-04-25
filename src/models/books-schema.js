@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 
 
 const bookSchema = mongoose.Schema({
-    title: {type: String},
-    author: {type: String},
+    title: {type: String, required: true },
+    author: {type: String, required: true },
     type: {type: String, uppercase: true, enum:['BOOK', 'SNACK', 'GAME']},
 });
 
