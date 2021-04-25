@@ -20,15 +20,15 @@ async function getBooks(req, res) {
     let getAllOfEm = await library.read();
     res.status(200).json(getAllOfEm);
   }
-  
+  //parseInt(req.params.id)
   async function getABook(req, res) {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     let one = await library.read(id);
-    res.status(200).json(one);
+    res.status(200).json(one)
   }
   
   async function createBook(req, res) {
-    let content = req.body.body;
+    let content = req.body;
     console.log("CREATING: ", content)
     let testCreation = await library.create(content);
     res.status(201).json(testCreation);
@@ -36,17 +36,18 @@ async function getBooks(req, res) {
   
   async function updateBook(req, res) {
     // placeholder for now
-    let updated = req.params;
-    let id = parseInt(req.params.id);
+    let id = req.params.id;
+    let updated = req.body;
+    console.log("UPDATE: ", updated, id)
     let updatedBook = await library.update(id, updated)
     res.status(202).json(updatedBook)
   }
   
   async function deleteBook(req, res) {
     // placeholder for now
-    let id = parseInt(req.params.id);
+    const id = req.params.id;
     await library.delete(id);
-    res.status(202).json(deletedBook)
+    res.status(202).send({msg: 'food item deleted'});
   }
   
   module.exports = bookRouter;

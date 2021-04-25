@@ -2,19 +2,19 @@
 
 const express = require('express');
 const app = express();
-
+require('dotenv').config();
 const mongoose = require('mongoose');
-const MONGODB_URI =  'mongodb://localhost:27017/books'
-//process.env.MONGODB_URI ||
+// const MONGO_ATLAS =  process.env.MONGO_ATLAS
+const MONGODB_URI = process.env.MONGODB_URI
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 
 mongoose.connect(MONGODB_URI, options);
-
 const logger = require("./middleware/logger.js");
-// const validator = require("./middleware/validator.js");
+
 
 const bookRoute  = require('./routes/book-route.js');
-// const snackRoute = require('./routes/book-route.js');
+const foodRouter = require('./routes/snack-route.js');
+
 const errorHandler = require('./error-handlers/500.js')
 const notFound = require('./error-handlers/404.js')
 
@@ -22,11 +22,11 @@ app.use(express.json());
 app.use(logger);
 
 app.use(bookRoute);
-// app.use(snackRoute);
+app.use(foodRouter);
 
 
 app.get("/", (req, res) => {
-  res.status(200).send("here we go again");
+  res.status(200).send("here we go again")
 });
 
 

@@ -14,44 +14,48 @@ describe('WEB SERVER:', () => {
   });
 
   it('should respond with a 500 on an error', () => {
-    return mockRequest.get('/person?notName=notFred').then(data => {
+    return mockRequest.put('/books/').then(data => {
         expect(data.status).toBe(500);
 });
   });
   
   it('should create a new item in the DB', async () => {
-    const ressy = await mockRequest.post('/books').send({title: "Test1", author: "testMan1"})
-    expect(ressy.req.data).toEqual("Test1")
-   
+    const ressy = await mockRequest.post('/books').send({title: "Test1", author: "testMan1", type: "BOOK"})
+    expect(ressy.status).toBe(201);
+  //  expect(ressy.body.title).toEqual("Test1");
   });
 
   it('should get all from DB', async () => {
     let db = await mockRequest.get('/books')
-    expect(db.req.data.length).toEqual(1);
-
+    expect(db.status).toBe(200);
   });
 
   
 
   it('should get one item from the DB', async () => {
-    let getter = await mockRequest.get('/books/0')
-    expect(getter.req.data.title).toEqual("Test1")
+    let tBook = await mockRequest.post('/books').send({ title: "test", author:"1 from db", type: "BOOK"})
+    let id = tBook.body._id
+    let getter = await mockRequest.get(`/books/${id}`)
+    expect(getter.body._id).toEqual(id)
     
   });
 
  
 
   it('should update an item in the DB', async () => {
-     mockRequest.put('/books/0').send({title: "Test1updated", author: "testMan1updated"})
-      return mockRequest.get('/books/0').then(data=>{
-        expect(data.req.data.author).toEqual("testMan1updated")
-    });
+    const newOb = await mockRequest.post('/books').send({title: "Test1", author: "testMan1", type: "BOOK"})
+    const who = newOb.body._id
+    const updated = await mockRequest.put(`/books/${who}`).send({title: "updateMan", author: "whoCan", type: "BOOK"})
+    expect(updated.status).toBe(202);
+    expect(updated.body._id).toEqual(who);
+    
   });
 
   it('should delete an item in the DB', async () => {
-    mockRequest.delete('/books/1')
-    return mockRequest.get('/books/0').then(data=>{
-      expect(data.req.data).toEqual(undefined)
+    const newOb = await mockRequest.post('/books').send({title: "Testdel", author: "delMan", type: "BOOK"})
+    const who = newOb.body._id
+    await mockRequest.delete(`/books/${who}`).then(data=>{
+      expect(data.status).toEqual(202);
   });
 
 

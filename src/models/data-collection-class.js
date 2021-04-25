@@ -20,11 +20,11 @@ class OverClass {
         }
 
         update(_id, obj){
-            return this.model.findByIdAndUpdate(_id, obj, {new: true})
+            return this.model.findByIdAndUpdate(_id, obj, {new: true, useFindAndModify: false})
         }
 
         delete(_id){
-            return this.model.findByIdAndDelete(_id);
+            return this.model.findByIdAndDelete(_id, { useFindAndModify: false});
         }
 
 }
