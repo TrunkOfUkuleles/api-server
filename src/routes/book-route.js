@@ -47,7 +47,7 @@ async function getBooks(req, res) {
     // placeholder for now
     const id = req.params.id;
     await library.delete(id);
-    res.status(202).send({msg: 'food item deleted'});
+    res.status(202).send({msg: 'Book deleted'});
   }
   
   module.exports = bookRouter;
