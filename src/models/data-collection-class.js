@@ -7,8 +7,8 @@ class OverClass {
         }
 
         create(obj){
-            let newBook = this.model(obj)
-            return newBook.save();
+            let newThing= this.model(obj)
+            return newThing.save();
         }
 
         read(_id){

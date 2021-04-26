@@ -29,22 +29,18 @@ async function getBooks(req, res) {
   
   async function createBook(req, res) {
     let content = req.body;
-    console.log("CREATING: ", content)
     let testCreation = await library.create(content);
     res.status(201).json(testCreation);
   }
   
   async function updateBook(req, res) {
-    // placeholder for now
     let id = req.params.id;
     let updated = req.body;
-    console.log("UPDATE: ", updated, id)
     let updatedBook = await library.update(id, updated)
     res.status(202).json(updatedBook)
   }
   
   async function deleteBook(req, res) {
-    // placeholder for now
     const id = req.params.id;
     await library.delete(id);
     res.status(202).send({msg: 'Book deleted'});

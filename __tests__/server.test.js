@@ -7,7 +7,6 @@ const mockRequest = supertest(server);
 
 describe('WEB SERVER:', () => {
 
- 
 
   it('should respond with a 404 on not found', async () => {
     return mockRequest.get('/no-thing').then(data => {

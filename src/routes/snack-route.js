@@ -34,7 +34,6 @@ async function getSnacks(req, res) {
   }
   
   async function updateSnack(req, res) {
-    // placeholder for now
     let updated = req.body;
     let id = req.params.id;
     let updatedSnack = await store.update(id, updated)
