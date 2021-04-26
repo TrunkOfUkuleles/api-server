@@ -5,8 +5,8 @@ const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
 
-const MONGO_ATLAS =  process.env.MONGO_ATLAS
-// const MONGODB_URI = process.env.MONGODB_URI
+const MONGO_ATLAS =  process.env.MONGO_URL
+// const MONGODB_URI = process.env.MONGODB_LOCAL
 const options = { useNewUrlParser: true, useUnifiedTopology: true }
 
 mongoose.connect(MONGO_ATLAS, options);
